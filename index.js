@@ -18,6 +18,20 @@ function getSpud(spudId) {
   }
 }
 
+function passHotSpud(res, spud) {
+  try {
+    // if it's valid JSON, return it verbatim
+    JSON.parse(spud);
+    return res.end(spud);
+  } catch (e) {
+    // maybe it's a function?
+    if(spud.indexOf('function') === 0) {
+      console.log('its a function!');
+      return res.end({});
+    }
+  }
+}
+
 function putSpud(spudId, spud) {
   var path = 'spuds'+spudId;
   if(spud === null) {
@@ -78,7 +92,7 @@ var server = http.createServer(function(req, res) {
 
   var spud = getSpud(req.url);
   if(spud) {
-    return res.end(spud);
+    return passHotSpud(res, spud);
   }
   proxy.web(req, res, { target: 'http://local.vandebron.nl' });
 });
