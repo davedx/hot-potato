@@ -2,6 +2,14 @@ var http = require('http'),
     httpProxy = require('http-proxy'),
     fs = require('fs');
 
+if(process.argv.length < 4) {
+  console.error('Usage: node index <HOST> <LOCAL_PORT>');
+  console.error('Please supply a host to proxy, e.g. http://myapi.com:321, and the local port to bind to, e.g. 5050');
+  return;
+}
+var proxyHost = process.argv[2];
+var localPort = process.argv[3];
+
 var proxy = httpProxy.createProxyServer({});
 
 var spudCache = {};
@@ -80,8 +88,8 @@ var server = http.createServer(function(req, res) {
   if(spud) {
     return res.end(spud);
   }
-  proxy.web(req, res, { target: 'http://local.vandebron.nl' });
+  proxy.web(req, res, { target: proxyHost });
 });
 
-console.log("listening on port 5050")
-server.listen(5050);
+console.log('Proxying '+proxyHost+' on port '+localPort);
+server.listen(localPort);
