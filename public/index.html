@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+<title>Hot Potato Dashboard</title>
+<style>
+* {
+  font-family: sans-serif;
+}
+h1, img {
+  display: inline-block; vertical-align: middle
+}
+label {
+  margin: 0px 10px 10px 20px;
+  vertical-align: top;
+}
+input, textarea {
+  font-size: 18px;
+  margin: 0px 0px 10px 0px;
+}
+button {
+  margin: 20px 20px;
+  font-size: 18px;
+}
+</style>
+</head>
+<body>
+<img src="potato.png" width="200">
+<h1>Hot potato</h1>
+<div>
+  <label>URL:</label>
+  <input size="80" id="url" onChange="onChangeUrl()" value="api/signupFeed?limit=">
+</div>
+<div>
+  <label>Spud:</label>
+  <textarea rows="20" cols="80" id="spud"></textarea>
+</div>
+<div>
+  <button onClick="sendSpud()">Send</button>
+</div>
+<script>
+var spudTextArea = document.getElementById('spud');
+var url = document.getElementById('url');
+
+function onChangeUrl() {
+  tryLoadSpud("/hotpotato/spud/" + url.value);
+}
+
+function sendSpud() {
+  trySendSpud("/hotpotato/spud/" + url.value, spudTextArea.value);
+}
+
+function reqListener () {
+  console.log(this.responseText);
+}
+
+function tryLoadSpud(id) {
+  req(id, "GET", null, function (res) {
+    console.log('res: '+res);
+    spudTextArea.value = res;
+  });
+}
+
+function trySendSpud(id, spud) {
+  req(id, "POST", spud, function (res) {
+    console.log(res);
+  });
+}
+
+function req(url, method, data, cb) {
+  if (!window.xhr) {
+    window.xhr = new XMLHttpRequest();
+    xhr.addEventListener("load", function() {
+      if(this._cb) {
+        this._cb(this.responseText);
+      }
+    });
+  }
+  xhr._cb = cb;
+  xhr.open(method, url);
+  xhr.send(data);
+}
+
+</script>
+</body>
+</html>
