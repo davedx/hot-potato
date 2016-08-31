@@ -6,6 +6,14 @@ Hot potato is an intercepting proxy that sits between an API and an API client, 
 
 For ease of use, it also features a simple web interface running on the same port as the proxy itself, accessible at `HOST_NAME/hotpotato/public/index.html`. This interface is used to add, update and delete the "spuds": hot chunks of JSON data (or XML, if that's your kink) mapped to URLs.
 
+## What's it useful for?
+
+* You need to develop client code that's dependent on backend responses, but the backend isn't ready yet: use it to avoid having to pollute your client by hardcoding or loading mock data.
+
+* You have test scenarios that are very difficult to replicate in your production or staging environments: simulate the exact data you need in the client.
+
+* You don't want to mess about with native desktop clients, or you need to do intercepting on a server inside a secure network...
+
 ## Installing
 
 Clone the repository
