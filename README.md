@@ -31,7 +31,3 @@ To add a spud, enter a URL to intercept in the URL field (can include query para
 You can also add spuds manually by putting them in the `spuds` directory, ensuring the nested directories match the URL structure (there is no database).
 
 Finally, you'll need to update your API client (web app, game, orchestration layer, etc.) to point at the proxy instead of the API.
-
-## Notes
-
-Yes, there's a lot of synchronous calls in there, but it's nice and readable, isn't it?
