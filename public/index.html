@@ -49,10 +49,6 @@ function sendSpud() {
   trySendSpud("/hotpotato/spud/" + url.value, spudTextArea.value);
 }
 
-function reqListener () {
-  console.log(this.responseText);
-}
-
 function tryLoadSpud(id) {
   req(id, "GET", null, function (res) {
     console.log('res: '+res);
