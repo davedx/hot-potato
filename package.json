@@ -1,14 +1,30 @@
 {
-  "name": "passthru",
+  "name": "hot-potato",
   "version": "1.0.0",
-  "description": "",
+  "description": "![Image of a hot potato](https://github.com/davedx/hot-potato/raw/master/public/potato.png)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Dave Clayton <davedx@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "http-proxy": "^1.14.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davedx/hot-potato.git"
+  },
+  "keywords": [
+    "proxy",
+    "intercepting",
+    "easy",
+    "https",
+    "http"
+  ],
+  "bugs": {
+    "url": "https://github.com/davedx/hot-potato/issues"
+  },
+  "homepage": "https://github.com/davedx/hot-potato#readme"
 }
