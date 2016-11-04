@@ -1,6 +1,8 @@
 var http = require('http'),
+    https = require('https'),
     httpProxy = require('http-proxy'),
-    fs = require('fs');
+    fs = require('fs'),
+    url = require('url');
 
 if(process.argv.length < 4) {
   console.error('Usage: node index <HOST> <LOCAL_PORT>');
@@ -88,7 +90,21 @@ var server = http.createServer(function(req, res) {
   if(spud) {
     return res.end(spud);
   }
-  proxy.web(req, res, { target: proxyHost });
+  var opts = {
+    target: proxyHost
+  };
+  if (proxyHost.indexOf('https') !== -1) {
+    var proxyHostUrl = url.parse(proxyHost);
+    opts = Object.assign(opts, {
+      agent: https.globalAgent,
+      changeOrigin: true,
+      headers: {
+        host: proxyHostUrl.hostname
+      },    
+      https: true
+    });
+  }
+  proxy.web(req, res, opts);
 });
 
 console.log('Proxying '+proxyHost+' on port '+localPort);
