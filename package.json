@@ -1,7 +1,7 @@
 {
   "name": "hot-potatoes",
   "version": "1.0.0",
-  "description": "![Image of a hot potato](https://github.com/davedx/hot-potato/raw/master/public/potato.png)",
+  "description": "Hot potato is an intercepting proxy that sits between an API and an API client, smoothly swapping certain specified responses for whatever mock or fake data you need in your client.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
